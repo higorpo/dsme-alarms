@@ -1,6 +1,9 @@
+import axios from "axios";
+
 import { Alarm } from "../../generated/client";
 import { prisma } from "../config/prisma";
 import { AlreadyExistsException } from "../exceptions/AlreadyExistsException";
+import { NotFound } from "../exceptions/NotFound";
 import {
     CreateAlarmService,
     CreateAlarmServiceDTO,
@@ -11,6 +14,12 @@ class CreateAlarmServiceImpl implements CreateAlarmService {
         propertyId,
         isActivated,
     }: CreateAlarmServiceDTO): Promise<Alarm> {
+        try {
+            await axios.get(`${process.env.HOST}/properties/${propertyId}`);
+        } catch (err) {
+            throw new NotFound("Property not found");
+        }
+
         const alarmCount = await prisma.alarm.count({
             where: {
                 propertyId,

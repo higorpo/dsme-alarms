@@ -35,6 +35,12 @@ class AlarmsController {
             if (err instanceof AlreadyExistsException) {
                 return res.status(400).send({ error: err.message });
             }
+            if (
+                err instanceof AlreadyExistsException ||
+                err instanceof NotFound
+            ) {
+                return res.status(400).send({ error: err.message });
+            }
             return res.status(500).send({ error: "Unexpected error" });
         }
     }
