@@ -10,3 +10,8 @@ datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")
 }
+
+model Monitor {
+    id      String @id @default(uuid())
+    alarmId String
+}
