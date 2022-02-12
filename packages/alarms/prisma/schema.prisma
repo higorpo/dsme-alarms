@@ -3,6 +3,7 @@
 
 generator client {
     provider = "prisma-client-js"
+    output   = "../generated/client"
 }
 
 datasource db {
@@ -11,9 +12,9 @@ datasource db {
 }
 
 model Alarm {
-    id         String   @id @default(uuid())
-    propertyId String
-    isActived  Boolean
-    createdAt  DateTime @default(now())
-    updatedAt  DateTime @updatedAt
+    id          String   @id @default(uuid())
+    propertyId  String
+    isActivated Boolean
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
 }

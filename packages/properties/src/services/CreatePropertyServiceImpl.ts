@@ -1,5 +1,4 @@
-import { Property } from "@prisma/client";
-
+import { Property } from "../../generated/client";
 import { prisma } from "../config/prisma";
 import { AlreadyExistsException } from "../exceptions/AlreadyExistsException";
 import {

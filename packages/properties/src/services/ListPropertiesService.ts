@@ -1,4 +1,4 @@
-import { Property } from "@prisma/client";
+import { Property } from "../../generated/client";
 
 interface ListPropertiesService {
     execute(): Promise<Property[]>;
