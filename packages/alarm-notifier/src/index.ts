@@ -19,8 +19,10 @@ app.post("/alarm-notifier/:alarmId", async (req: Request, res: Response) => {
         console.log(
             `\n\nO alarme ${alarmData.id} da casa ${propertyData.id} que fica no endereço ${propertyData.address} detectou um movimento suspeito!`
         );
+
+        return res.status(201).send();
     } catch (err) {
-        res.status(500).send({ error: "Unexpected error" });
+        return res.status(500).send({ error: "Unexpected error" });
     }
 });
 

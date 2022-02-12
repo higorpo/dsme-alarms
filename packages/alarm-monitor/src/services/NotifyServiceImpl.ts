@@ -6,7 +6,7 @@ import { NotifyService } from "./NotifyService";
 class NotifyServiceImpl implements NotifyService {
     async execute(alarmId: string): Promise<void> {
         try {
-            await axios.post(`${process.env.HOST}/alarms-notifier/${alarmId}`);
+            await axios.post(`${process.env.HOST}/alarm-notifier/${alarmId}`);
         } catch (err) {
             throw new OfflineNotifyService("Offline notify service");
         }
