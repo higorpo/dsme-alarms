@@ -10,3 +10,9 @@ datasource db {
     provider = "mysql"
     url      = env("DATABASE_URL")
 }
+
+model AlarmStatus {
+    id        String   @id @default(uuid())
+    alarmId   String
+    createdAt DateTime @default(now())
+}
