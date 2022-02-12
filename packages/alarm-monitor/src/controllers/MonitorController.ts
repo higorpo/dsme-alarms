@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 
 import { NotFound } from "../exceptions/NotFound";
+import { OfflineNotifyService } from "../exceptions/OfflineNotifyService";
 import { CreateMonitorService } from "../services/CreateMonitorService";
 
 class MonitorController {
@@ -24,6 +25,9 @@ class MonitorController {
         } catch (err) {
             if (err instanceof NotFound) {
                 return res.status(400).send({ error: err.message });
+            }
+            if (err instanceof OfflineNotifyService) {
+                return res.status(500).send({ error: err.message });
             }
             return res.status(500).send({ error: "Unexpected error" });
         }
