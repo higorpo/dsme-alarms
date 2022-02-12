@@ -17,6 +17,9 @@ const selectProxyHost = (req: Request) => {
     if (req.path.startsWith("/alarm-monitor")) {
         return "http://localhost:8004";
     }
+    if (req.path.startsWith("/alarm-notifier")) {
+        return "http://localhost:8005";
+    }
     return "undefined"; // TODO: Add next proxy host
 };
 
