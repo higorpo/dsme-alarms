@@ -3,9 +3,13 @@ import { validationResult } from "express-validator";
 
 import { AlreadyExistsException } from "../exceptions/AlreadyExistsException";
 import { CreatePropertyService } from "../services/CreatePropertyService";
+import { ListPropertiesService } from "../services/ListPropertiesService";
 
 class PropertiesController {
-    constructor(private createPropertyService: CreatePropertyService) {
+    constructor(
+        private createPropertyService: CreatePropertyService,
+        private listPropertiesService: ListPropertiesService
+    ) {
         //
     }
 
@@ -31,6 +35,12 @@ class PropertiesController {
             }
             return res.status(500).send({ error: "Unexpected error" });
         }
+    }
+
+    async list(req: Request, res: Response) {
+        const properties = await this.listPropertiesService.execute();
+
+        return res.json(properties).send();
     }
 }
 
