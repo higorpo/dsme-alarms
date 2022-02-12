@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 
+import { InactiveAlarm } from "../exceptions/InactiveAlarm";
 import { NotFound } from "../exceptions/NotFound";
 import { OfflineNotifyService } from "../exceptions/OfflineNotifyService";
 import { CreateMonitorService } from "../services/CreateMonitorService";
@@ -23,7 +24,7 @@ class MonitorController {
 
             return res.status(201).json(alarm).send();
         } catch (err) {
-            if (err instanceof NotFound) {
+            if (err instanceof NotFound || err instanceof InactiveAlarm) {
                 return res.status(400).send({ error: err.message });
             }
             if (err instanceof OfflineNotifyService) {
