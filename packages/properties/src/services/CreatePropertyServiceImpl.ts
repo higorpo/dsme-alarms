@@ -1,6 +1,7 @@
 import { Property } from "@prisma/client";
 
 import { prisma } from "../config/prisma";
+import { AlreadyExistsException } from "../exceptions/AlreadyExistsException";
 import {
     CreatePropertyService,
     CreatePropertyServiceDTO,
@@ -19,7 +20,9 @@ class CreatePropertyServiceImpl implements CreatePropertyService {
         });
 
         if (propertyCount > 0) {
-            throw Error("Property already exists at this address");
+            throw new AlreadyExistsException(
+                "Property already exists at this address"
+            );
         }
 
         const property = prisma.property.create({

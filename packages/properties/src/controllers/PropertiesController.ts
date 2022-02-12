@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { validationResult } from "express-validator";
 
+import { AlreadyExistsException } from "../exceptions/AlreadyExistsException";
 import { CreatePropertyService } from "../services/CreatePropertyService";
 
 class PropertiesController {
@@ -24,8 +25,11 @@ class PropertiesController {
             });
 
             return res.status(201).json(property).send();
-        } catch (err: any) {
-            return res.status(400).send({ error: err.message });
+        } catch (err) {
+            if (err instanceof AlreadyExistsException) {
+                return res.status(400).send({ error: err.message });
+            }
+            return res.status(500).send({ error: "Unexpected error" });
         }
     }
 }
