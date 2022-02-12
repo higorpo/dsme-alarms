@@ -8,6 +8,9 @@ const selectProxyHost = (req: Request) => {
     if (req.path.startsWith("/properties")) {
         return "http://localhost:8001";
     }
+    if (req.path.startsWith("/alarms")) {
+        return "http://localhost:8002";
+    }
     return "undefined"; // TODO: Add next proxy host
 };
 
