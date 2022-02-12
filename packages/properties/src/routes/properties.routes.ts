@@ -1,11 +1,13 @@
 import { Router } from "express";
 
 import { PropertiesController } from "../controllers/PropertiesController";
+import { CreatePropertyServiceImpl } from "../services/CreatePropertyServiceImpl";
 
 const PropertiesRoutes = Router();
 
-const controller = new PropertiesController();
+const createPropertyService = new CreatePropertyServiceImpl();
+const controller = new PropertiesController(createPropertyService);
 
-PropertiesRoutes.post("/", controller.create);
+PropertiesRoutes.post("/", (req, res) => controller.create(req, res));
 
 export { PropertiesRoutes };
