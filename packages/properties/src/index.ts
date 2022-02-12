@@ -11,3 +11,7 @@ app.use(routes);
 app.listen(process.env.PORT, () =>
     console.log(`Server is running on PORT ${process.env.PORT}!`)
 );
+
+process.on("SIGTERM", () => {
+    process.exit();
+});
